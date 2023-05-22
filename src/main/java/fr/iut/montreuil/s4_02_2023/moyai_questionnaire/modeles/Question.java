@@ -4,14 +4,14 @@ public class Question {
 
     private int id;
     private int num;
-    private Langue langue;
+    private LangueEnum langue;
     private String libellé;
     private String réponse;
     private int difficulté;
     private String explication;
     private String déférence;
 
-    public Question(int id, int num, Langue langue, String libellé, String réponse, int difficulté, String explication, String déférence) {
+    public Question(int id, int num, LangueEnum langue, String libellé, String réponse, int difficulté, String explication, String déférence) {
         this.id = id;
         this.num = num;
         this.langue = langue;
@@ -38,11 +38,11 @@ public class Question {
         this.num = num;
     }
 
-    public Langue getLangue() {
+    public LangueEnum getLangue() {
         return langue;
     }
 
-    public void setLangue(Langue langue) {
+    public void setLangue(LangueEnum langue) {
         this.langue = langue;
     }
 

@@ -1,6 +1,7 @@
 package fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles;
 
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.bo.ListQuestionBO;
+import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.bo.QuestionBO;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.exceptions.FormatInvalide;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.exceptions.FichierIntrouvable;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.exceptions.FichierVide;
@@ -21,24 +22,18 @@ public class Questionnaire {
 //        return ;
 //    }
     public ListQuestionBO chargerQuestionnaire(String urlFicherCSV) throws FichierIntrouvable, FormatInvalide{
-        List<List<String>> l = new ArrayList<>();
-        File provFile = new File("");
+        List<QuestionBO> l = new ArrayList<>();
         try {
-            System.out.println(provFile.getAbsoluteFile()+"\\src\\main\\java\\fr\\iut\\montreuil\\s4_02_2023\\moyai_questionnaire\\resources\\"+urlFicherCSV);
-            BufferedReader br = new BufferedReader(new FileReader(provFile.getAbsoluteFile()+"\\src\\main\\java\\fr\\iut\\montreuil\\s4_02_2023\\moyai_questionnaire\\resources\\"+urlFicherCSV));
+            BufferedReader br = new BufferedReader(new FileReader(urlFicherCSV));
             String ligne = null;
             while ((ligne = br.readLine()) != null) {
                 // Retourner la ligne dans un tableau
                 String[] data = ligne.split(";");
                 if (data.length != 8) throw new FormatInvalide();
-                ArrayList<String>  stringArrayList = new ArrayList<String>();
+                QuestionBO q = new QuestionBO(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
                 // Afficher le contenu du tableau
-                for (String val : data) {
-                    stringArrayList.add(val);
-                    System.out.println(val);
-                }
-                System.out.println(stringArrayList);
-                l.add(stringArrayList);
+                System.out.println(q.toString());
+                l.add(q);
             }
             br.close();
         } catch (FileNotFoundException e) {
