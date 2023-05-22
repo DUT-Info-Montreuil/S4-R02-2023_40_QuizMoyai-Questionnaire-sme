@@ -21,9 +21,12 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.bo.ListQuestionBO;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.bo.QuestionBO;
+import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.dto.ListQuestionDTO;
+import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.dto.QuestionDTO;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.LangueEnum;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.Question;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.Questionnaire;
+import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.StatsQuestionnaire;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.exceptions.FichierIntrouvable;
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.exceptions.FormatInvalide;
 
@@ -47,10 +50,10 @@ public class QuestionnaireTest {
     		"Le joueur peut poser sa balle sur une cheville de bois ou de plastique qui ne peut pas être utilisée en dehors des départs.", "https://fr.wikipedia.org/wiki/Matériel_de_golf");
 	
 	@Mock
-	Question Question2;
+	QuestionDTO Question2;
 	
 	@Mock
-	Question Question3;
+	QuestionDTO Question3;
 	
 	private Questionnaire questionnaireService = new Questionnaire() ;
 
@@ -100,10 +103,7 @@ public class QuestionnaireTest {
 
 //		assertThrows(FichierVide.class, () -> {Questionnaire.chargerQuestionnaire(cheminFichierCsvVide);});
 	}
-	@Test
-	public void chargerQuestionnaireFichierExtensionTest() throws CsvValidationException, IOException  {
 
-	}
 	@Test
 	public void chargerQuestionnaireFichierFormatInvalideTest() throws CsvValidationException, IOException, FormatInvalide, FichierIntrouvable {
 		cheminFichierCsvIncorrecte = getCSVFiles.getAbsolutePath() + "/src/test/java/fr/iut/montreuil/S4_R02_2023/moyai_questionnaire/resources/" + nomFicherFormatInvalide ;
@@ -113,6 +113,26 @@ public class QuestionnaireTest {
 			public void execute() throws Throwable {questionnaire.chargerQuestionnaire(cheminFichierCsvIncorrecte);}
 		}));
 
+	}
+	
+	@Test
+	public void fournirStatsQuestionnaireCasNormaleTest() throws CsvValidationException, IOException  {
+		Question2.getStatsQuestion().setNbFois(1);
+		Question3.getStatsQuestion().setNbFois(2);
+		
+		StatsQuestionnaire statQuestionnaire = Mockito.mock(StatsQuestionnaire.class);
+		
+		ListQuestionDTO questionList = new ListQuestionDTO(statQuestionnaire);
+		questionnaireService = new Questionnaire();
+		questionnaireService.setQuestionList(questionList);
+		
+		Assertions.assertEquals(questionnaireService.getQuestionList().getStatsQuestionnaire().getNbfois(),  3);
+		
+		
+	
+		
+		
+		
 	}
 	
 
