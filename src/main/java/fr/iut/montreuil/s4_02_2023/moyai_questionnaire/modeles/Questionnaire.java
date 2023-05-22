@@ -21,7 +21,7 @@ public class Questionnaire {
 //    public Questionnaire fournirListQuestionnaire(String urlFichierCSV) {
 //        return ;
 //    }
-    public ListQuestionBO chargerQuestionnaire(String urlFicherCSV) throws FichierIntrouvable, FormatInvalide{
+    public static ListQuestionBO chargerQuestionnaire(String urlFicherCSV) throws FichierIntrouvable, FormatInvalide{
         List<QuestionBO> l = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(urlFicherCSV));
@@ -29,10 +29,11 @@ public class Questionnaire {
             while ((ligne = br.readLine()) != null) {
                 // Retourner la ligne dans un tableau
                 String[] data = ligne.split(";");
+                System.out.println(data.toString());
+                System.out.println(data.length);
                 if (data.length != 8) throw new FormatInvalide();
                 QuestionBO q = new QuestionBO(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
                 // Afficher le contenu du tableau
-                System.out.println(q.toString());
                 l.add(q);
             }
             br.close();

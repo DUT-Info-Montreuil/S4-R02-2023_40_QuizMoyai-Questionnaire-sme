@@ -7,8 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.File;
 import java.io.IOException;
 
+import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.exceptions.FichierVide;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
@@ -32,10 +34,11 @@ public class QuestionnaireTest {
 	String nomFichierCsv = "questionsQuizz_V1.1.csv";
 	String nomFichierCsvInexistant = "questionsQuizz_V22000.csv";
 	String nomFichierCsvVide = "questionsQuizz_V1.1_vide.csv";
+	String nomFicherFormatInvalide = "questionsQuizz_V1.1_invalide.csv";
 	String nomFichierTxt = "questionsQuizz_V1.1.txt";
 	private File getCSVFiles = new File("");
 	private CSVReader csvReader;
-	private String cheminFichierCsvCorrecte;
+	private String cheminFichierCsvCorrecte ;
 	private String cheminFichierCsvIncorrecte ;
 	private String cheminFichierCsvVide = getCSVFiles.getAbsolutePath() + "/src/test/java/fr/iut/montreuil/S4_R02_2023/moyai_questionnaire/resources/" + nomFichierCsvVide ;
 	
@@ -86,6 +89,31 @@ public class QuestionnaireTest {
 		});
 	}
 	
+		@Test
+	public void chargerQuestionnaireFichierVideTest() throws CsvValidationException, IOException  {
+		cheminFichierCsvCorrecte = getCSVFiles.getAbsolutePath() + "/src/test/java/fr/iut/montreuil/S4_R02_2023/moyai_questionnaire/resources/" + nomFichierCsv ;
+		final Questionnaire questionnaire = new Questionnaire();
+		assertThrows(FormatInvalide.class, (new Executable() {
+				@Override
+				public void execute() throws Throwable {questionnaire.chargerQuestionnaire(cheminFichierCsvVide);}
+		}));
+
+//		assertThrows(FichierVide.class, () -> {Questionnaire.chargerQuestionnaire(cheminFichierCsvVide);});
+	}
+	@Test
+	public void chargerQuestionnaireFichierExtensionTest() throws CsvValidationException, IOException  {
+
+	}
+	@Test
+	public void chargerQuestionnaireFichierFormatInvalideTest() throws CsvValidationException, IOException, FormatInvalide, FichierIntrouvable {
+		cheminFichierCsvIncorrecte = getCSVFiles.getAbsolutePath() + "/src/test/java/fr/iut/montreuil/S4_R02_2023/moyai_questionnaire/resources/" + nomFicherFormatInvalide ;
+		final Questionnaire questionnaire = new Questionnaire();
+		assertThrows(FormatInvalide.class, (new Executable() {
+			@Override
+			public void execute() throws Throwable {questionnaire.chargerQuestionnaire(cheminFichierCsvIncorrecte);}
+		}));
+
+	}
 	
 
 }
