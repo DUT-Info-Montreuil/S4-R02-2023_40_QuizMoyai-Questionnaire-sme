@@ -1,7 +1,6 @@
 package fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.dto;
 
 import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.LangueEnum;
-import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.StatsQuestion;
 
 public class QuestionDTO {
     private int id;
@@ -12,9 +11,9 @@ public class QuestionDTO {
     private int difficulté;
     private String explication;
     private String déférence;
-    private StatsQuestion statsQuestion;
+    private StatsQuestionDTO statsQuestion;
 
-    public QuestionDTO(int id, int num, LangueEnum langue, String libellé, String réponse, int difficulté, String explication, String déférence, StatsQuestion stats) {
+    public QuestionDTO(int id, int num, LangueEnum langue, String libellé, String réponse, int difficulté, String explication, String déférence, StatsQuestionDTO stats) {
         this.id = id;
         this.num = num;
         this.langue = langue;
@@ -90,11 +89,11 @@ public class QuestionDTO {
         this.déférence = déférence;
     }
 
-    public StatsQuestion getStatsQuestion() {
+    public StatsQuestionDTO getStatsQuestion() {
         return statsQuestion;
     }
 
-    public void setStatsQuestion(StatsQuestion statsQuestion) {
+    public void setStatsQuestion(StatsQuestionDTO statsQuestion) {
         this.statsQuestion = statsQuestion;
     }
 

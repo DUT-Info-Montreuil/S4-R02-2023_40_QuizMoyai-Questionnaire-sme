@@ -1,26 +1,24 @@
 package fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.dto;
 
-import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.StatsQuestionnaire;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListQuestionDTO {
 
-    private fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles.StatsQuestionnaire statsQuestionnaire ;
+    private fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.dto.StatsQuestionnaireDTO statsQuestionnaire ;
     private List<QuestionDTO> l ;
 
 
-    public ListQuestionDTO(StatsQuestionnaire statsQuestionnaire) {
+    public ListQuestionDTO(StatsQuestionnaireDTO statsQuestionnaire) {
         this.statsQuestionnaire = statsQuestionnaire;
         this.l =new ArrayList<QuestionDTO>();
     }
 
-    public StatsQuestionnaire getStatsQuestionnaire() {
+    public StatsQuestionnaireDTO getStatsQuestionnaire() {
         return statsQuestionnaire;
     }
 
-    public void setStatsQuestionnaire(StatsQuestionnaire statsQuestionnaire) {
+    public void setStatsQuestionnaire(StatsQuestionnaireDTO statsQuestionnaire) {
         this.statsQuestionnaire = statsQuestionnaire;
     }
 

@@ -1,14 +1,12 @@
-package fr.iut.montreuil.s4_02_2023.moyai_questionnaire.modeles;
+package fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.dto;
 
-import fr.iut.montreuil.s4_02_2023.moyai_questionnaire.entities.dto.QuestionDTO;
-
-public class StatsQuestion {
+public class StatsQuestionDTO {
     private int nbFois;
     private int nbReussi;
     private String libelle;
     private float pourcentage;
 
-    public StatsQuestion(int nbFois, int nbReussi, String libelle) {
+    public StatsQuestionDTO(int nbFois, int nbReussi, String libelle) {
         this.nbFois = nbFois;
         this.nbReussi = nbReussi;
         this.libelle = libelle;
